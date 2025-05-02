@@ -6,13 +6,14 @@ import sys
 import textwrap
 import threading
 
+
 def execute(cmd):
     cmd = cmd.strip()
     if not cmd:
         return ""
     try:
-        output = subprocess.check_output(shlex.split(cmd), stderr=subprocess.STDOUT, shell=True)
-        return output.decode('utf-8')
+        output = subprocess.check_output(shlex.split(cmd), stderr=subprocess.STDOUT)
+        return output.decode()
     except subprocess.CalledProcessError as e:
         return e.output.decode('utf-8')
 
@@ -83,7 +84,7 @@ class NetCat:
         elif self.args.command:
             try:
                 while True:
-                    client_socket.send(b"BHP: #> ")
+                    client_socket.send(b"<BHP: #> ")
                     cmd_buffer = b""
                     while b"\n" not in cmd_buffer:
                         cmd_buffer += client_socket.recv(64)
