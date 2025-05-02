@@ -27,7 +27,7 @@ def hexdump(src, length=16, show=True):
 # Funcion que los dos extremos del proxy usaran para recibir datos
 def receive_from(connection):
     buffer = b""
-    connection.settimeout(5)
+    connection.settimeout(7)
     try:
         while True:
             data = connection.recv(4096)
@@ -95,7 +95,7 @@ def server_loop(local_host, local_port, remote_host, remote_port, receive_first)
         sys.exit(0)
     
     print("[*] Listening on %s:%d" % (local_host, local_port))
-    server.listen(5)
+    server.listen(7)
     
     while True:
         client_socket, addr = server.accept()
